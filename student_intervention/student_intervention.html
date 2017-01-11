@@ -11800,7 +11800,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries</span>
@@ -11856,7 +11856,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Calculate number of students</span>
@@ -11919,7 +11919,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -12001,7 +12001,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12072,23 +12072,18 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="c1"># TODO: Set the number of training points</span>
-<span class="n">num_train</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="c1"># Set the number of testing points</span>
-<span class="n">num_test</span> <span class="o">=</span> <span class="n">X_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">num_train</span>
-<span class="n">X_all</span><span class="p">,</span><span class="n">y_all</span><span class="o">=</span><span class="n">shuffle</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span><span class="n">y_all</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># TODO: Shuffle and split the dataset into the number of training and testing points above</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_all</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_all</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_all</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_all</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]</span>
-
+<span class="c1">#Do stratification on test set to reduce variance by taking a sample that matches the population</span>
+<span class="c1">#i.e take a balanced sample</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">stratify</span> <span class="o">=</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1"># Show the results of the split</span>
 <span class="k">print</span> <span class="s2">&quot;Training set has {} samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="k">print</span> <span class="s2">&quot;Testing set has {} samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -12157,31 +12152,12 @@ Testing set has 95 samples.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <h4 id="The-three-models-I-have-chosen-are:">The three models I have chosen are:<a class="anchor-link" href="#The-three-models-I-have-chosen-are:">&#182;</a></h4><ul>
-<li>KNearestNeighbors</li>
 <li>SVM</li>
-<li>GradientBoosting</li>
+<li>RandomForestClassifier</li>
+<li>GradientBoosting
+Real-world application of SVM:
+SVM can be used to predict distribution of hydrocarbons (Petroleum and Natural Gas) in reservoirs <a href="https://www.researchgate.net/publication/243190076_Applications_of_Support_Vector_Machines_in_the_Exploratory_Phase_of_Petroleum_and_Natural_Gas_a_Survey">[1]</a> </li>
 </ul>
-<p>Real-world application of KNearestNeighbors:
-We can use knn in facial recognition (<a href="http://www.hertasecurity.com/en/">Herta Security</a>) it is simple but 
-it works magic for providing non-linear decision.</p>
-<p>Strenghts of the model:</p>
-<ol>
-<li>Assumes nothing about the data 0 bias</li>
-<li>Robust to noisy training data </li>
-<li>Negligible training cost
-It performs well when data points are relatively less and there is less noise if we have done the feature extraction properly then it works good. If we have less knowledge of data then we dont want to assume anything about it hence knn.</li>
-</ol>
-<p>Weaknesses of the model:</p>
-<ol>
-<li>Gomputation cost is high (Lazy learner).</li>
-<li>Distance Metric needs to be chosen wisely Euclidean cannot always give the answer.</li>
-<li>Not learning anything from data can also be a disadvantage which can lead to loss in generalization</li>
-<li>Also choosing value of k can turn out to be an issue.
-If data has more noise and also if a lot of data points are present then computation cost increases. </li>
-</ol>
-<p>I chose this model because I had less knowledge about the data and I found data to be less noisy and data points are less so computation doesn't suffer that much also it gives relatively good performance.</p>
-<p>Real-world application of SVM:
-SVM can be used to predict distribution of hydrocarbons (Petroleum and Natural Gas) in reservoirs <a href="https://www.researchgate.net/publication/243190076_Applications_of_Support_Vector_Machines_in_the_Exploratory_Phase_of_Petroleum_and_Natural_Gas_a_Survey">[1]</a></p>
 <p>Strengths of the model:</p>
 <ol>
 <li>Useful for data that is not linearly separable.</li>
@@ -12195,8 +12171,32 @@ SVM can be used to predict distribution of hydrocarbons (Petroleum and Natural G
 It performs poorly if data has a lot of noise.</li>
 </ol>
 <p>This model is good for the data because data has a good number of features in relation to the number of data points and that data is not much linearly separable using a non-linear kernel can give good performance.</p>
-<p>Real-world application of GradientBoosting:
-Ranking problems would benifit from gradient boosting because there can be minor differences between ranks gradient boosting can refine our output and increase the confidence in the output also it can be used in text classification (<a href="http://media.nips.cc/Conferences/2007/Tutorials/Slides/schapire-NIPS-07-tutorial.pdf">Shapire</a>).</p>
+<p>Real world application of RandomForests:</p>
+<p>Random Forests are used to address multi-class classification problems and regression problems involved in Big Data [<a href="https://arxiv.org/pdf/1511.08327.pdf">2</a>]
+They are one of the most successful class of algorithms in the machine learning algorithm family for classification tasks among the 170+ models available.</p>
+<p>Advantages of random forests are:</p>
+<ol>
+<li>It is one of the most accurate learning algorithms available. For many data sets, it produces a highly accurate classifier.</li>
+<li>It runs efficiently on large databases.</li>
+<li>It can handle thousands of input variables without variable deletion.</li>
+<li>It gives estimates of what variables are important in the classification.</li>
+<li>It generates an internal unbiased estimate of the generalization error as the forest building progresses.</li>
+<li>It has an effective method for estimating missing data and maintains accuracy when a large proportion of the data are missing</li>
+<li>It has methods for balancing error in class population unbalanced data sets. </li>
+<li>Generated forests can be saved for future use on other data. </li>
+<li>Prototypes are computed that give information about the relation between the variables and the classification. </li>
+<li>It computes proximities between pairs of cases that can be used in clustering, locating outliers, or (by scaling) give interesting views of the data. </li>
+<li>The capabilities of the above can be extended to unlabeled data, leading to unsupervised clustering, data views and outlier  detection. </li>
+<li>It offers an experimental method for detecting variable interactions.</li>
+</ol>
+<p>Disadvantages of randomForests are:</p>
+<ol>
+<li>Random forests have been observed to overfit for some datasets with noisy classification/regression tasks.</li>
+<li>For data including categorical variables with different number of levels, random forests are biased in favor of those      attributes with more levels. Therefore, the variable importance scores from random forest are not reliable for this type of data</li>
+</ol>
+<p>As the disadvantages tell noisy data is bad for randomForests so I find the data has relatively less noise and my data does not have categorial variables they are binary perfect for randomForests.</p>
+<p>Real-world application of GradientBoosting:</p>
+<p>Ranking problems would benifit from gradient boosting because there can be minor differences between ranks gradient boosting can refine our output and increase the confidence in the output also it can be used in text classification (<a href="http://media.nips.cc/Conferences/2007/Tutorials/Slides/schapire-NIPS-07-tutorial.pdf">Shapire</a>).</p>
 <p>Advantages of GradientBoosting:</p>
 <ol>
 <li>good for low variance high bias data set</li>
@@ -12234,7 +12234,7 @@ Performs bad on data with more noise.</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12305,9 +12305,19 @@ Performs bad on data with more noise.</li>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Tabular-Results">Tabular Results<a class="anchor-link" href="#Tabular-Results">&#182;</a></h3><p>Edit the cell below to see how a table can be designed in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">Markdown</a>. You can record your results from above in the tables provided.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12315,13 +12325,13 @@ Performs bad on data with more noise.</li>
 <span class="c1"># from sklearn import model_B</span>
 <span class="c1"># from sklearn import model_C</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
-
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">clf_B</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 
 <span class="c1"># TODO: Set up the training set sizes</span>
@@ -12358,60 +12368,60 @@ Performs bad on data with more noise.</li>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0000 seconds
-Made predictions in 0.0040 seconds.
-F1 score for training set: 0.8209.
-Made predictions in 0.0040 seconds.
-F1 score for test set: 0.7808.
-Training a KNeighborsClassifier using a training set size of 200. . .
-Trained model in 0.0040 seconds
-Made predictions in 0.0040 seconds.
-F1 score for training set: 0.8090.
-Made predictions in 0.0040 seconds.
-F1 score for test set: 0.7972.
-Training a KNeighborsClassifier using a training set size of 300. . .
-Trained model in 0.0000 seconds
-Made predictions in 0.0080 seconds.
-F1 score for training set: 0.8599.
-Made predictions in 0.0040 seconds.
-F1 score for test set: 0.7832.
-Training a SVC using a training set size of 100. . .
-Trained model in 0.0000 seconds
-Made predictions in 0.0040 seconds.
-F1 score for training set: 0.8571.
+<pre>Training a SVC using a training set size of 100. . .
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
+F1 score for training set: 0.8772.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.8571.
+F1 score for test set: 0.8000.
 Training a SVC using a training set size of 200. . .
 Trained model in 0.0040 seconds
 Made predictions in 0.0040 seconds.
-F1 score for training set: 0.8512.
+F1 score for training set: 0.8474.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.8428.
+F1 score for test set: 0.8182.
 Training a SVC using a training set size of 300. . .
 Trained model in 0.0080 seconds
 Made predictions in 0.0080 seconds.
-F1 score for training set: 0.8597.
+F1 score for training set: 0.8686.
+Made predictions in 0.0040 seconds.
+F1 score for test set: 0.8286.
+Training a RandomForestClassifier using a training set size of 100. . .
+Trained model in 0.0240 seconds
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.8535.
+F1 score for training set: 0.9934.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.8000.
+Training a RandomForestClassifier using a training set size of 200. . .
+Trained model in 0.0240 seconds
+Made predictions in 0.0010 seconds.
+F1 score for training set: 0.9891.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.8615.
+Training a RandomForestClassifier using a training set size of 300. . .
+Trained model in 0.0200 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 0.9925.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.8837.
 Training a GradientBoostingClassifier using a training set size of 100. . .
-Trained model in 0.1320 seconds
+Trained model in 0.0550 seconds
 Made predictions in 0.0000 seconds.
 F1 score for training set: 1.0000.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.7943.
+F1 score for test set: 0.7970.
 Training a GradientBoostingClassifier using a training set size of 200. . .
-Trained model in 0.0790 seconds
-Made predictions in 0.0010 seconds.
-F1 score for training set: 0.9881.
+Trained model in 0.0930 seconds
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.7972.
+F1 score for training set: 0.9964.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.8382.
 Training a GradientBoostingClassifier using a training set size of 300. . .
-Trained model in 0.1010 seconds
+Trained model in 0.1680 seconds
 Made predictions in 0.0000 seconds.
-F1 score for training set: 0.9604.
+F1 score for training set: 0.9663.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.7857.
+F1 score for test set: 0.8855.
 </pre>
 </div>
 </div>
@@ -12425,17 +12435,7 @@ F1 score for test set: 0.7857.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tabular-Results">Tabular Results<a class="anchor-link" href="#Tabular-Results">&#182;</a></h3><p>Edit the cell below to see how a table can be designed in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">Markdown</a>. You can record your results from above in the tables provided.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Classifer 1 - KNeighbors</strong></p>
+<p><strong> Classifer 1 - SVM</strong></p>
 <table>
 <thead><tr>
 <th style="text-align:center">Training Set Size</th>
@@ -12448,58 +12448,58 @@ F1 score for test set: 0.7857.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
+<td style="text-align:center">0.0020</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.0040</td>
-<td style="text-align:center">0.8209</td>
-<td style="text-align:center">0.7808</td>
-</tr>
-<tr>
-<td style="text-align:center">200</td>
-<td style="text-align:center">0.0040</td>
-<td style="text-align:center">0.0040</td>
-<td style="text-align:center">0.8090</td>
-<td style="text-align:center">0.7972</td>
-</tr>
-<tr>
-<td style="text-align:center">300</td>
-<td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.0040</td>
-<td style="text-align:center">0.8599</td>
-<td style="text-align:center">0.7832</td>
-</tr>
-</tbody>
-</table>
-<p><strong> Classifer 2 - SVM</strong></p>
-<table>
-<thead><tr>
-<th style="text-align:center">Training Set Size</th>
-<th style="text-align:center">Training Time</th>
-<th style="text-align:center">Prediction Time (test)</th>
-<th style="text-align:center">F1 Score (train)</th>
-<th style="text-align:center">F1 Score (test)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">100</td>
-<td style="text-align:center">0.0010</td>
-<td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8571</td>
-<td style="text-align:center">0.8571</td>
+<td style="text-align:center">0.8772</td>
+<td style="text-align:center">0.8000</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0040</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8512</td>
-<td style="text-align:center">0.8428</td>
+<td style="text-align:center">0.8474</td>
+<td style="text-align:center">0.8182</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
 <td style="text-align:center">0.0080</td>
+<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.8686</td>
+<td style="text-align:center">0.8286</td>
+</tr>
+</tbody>
+</table>
+<p><strong> Classifer 2 - RandomForests</strong></p>
+<table>
+<thead><tr>
+<th style="text-align:center">Training Set Size</th>
+<th style="text-align:center">Training Time</th>
+<th style="text-align:center">Prediction Time (test)</th>
+<th style="text-align:center">F1 Score (train)</th>
+<th style="text-align:center">F1 Score (test)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center">0.0240</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8597</td>
-<td style="text-align:center">0.8535</td>
+<td style="text-align:center">0.9934</td>
+<td style="text-align:center">0.8000</td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">0.0240</td>
+<td style="text-align:center">0.0010</td>
+<td style="text-align:center">0.9891</td>
+<td style="text-align:center">0.8615</td>
+</tr>
+<tr>
+<td style="text-align:center">300</td>
+<td style="text-align:center">0.0200</td>
+<td style="text-align:center">0.0000</td>
+<td style="text-align:center">0.9925</td>
+<td style="text-align:center">0.8837</td>
 </tr>
 </tbody>
 </table>
@@ -12516,24 +12516,24 @@ F1 score for test set: 0.7857.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.1320</td>
+<td style="text-align:center">0.0550</td>
 <td style="text-align:center">0.0000</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.7943</td>
+<td style="text-align:center">0.7970</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0790</td>
+<td style="text-align:center">0.0930</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.9881</td>
-<td style="text-align:center">0.7972</td>
+<td style="text-align:center">0.9964</td>
+<td style="text-align:center">0.8382</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.1010</td>
+<td style="text-align:center">0.1680</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.9604</td>
-<td style="text-align:center">0.7857</td>
+<td style="text-align:center">0.9663</td>
+<td style="text-align:center">0.8855</td>
 </tr>
 </tbody>
 </table>
@@ -12567,7 +12567,8 @@ F1 score for test set: 0.7857.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-I prefer to use SVM model for classification because it performs best on the test set and gives a lot of generalization.There are some features that could not have much impact as we have a lot of features there and it is better to consider those who have a higher say in making classification decisions.Since this problem is binary classification and SVM is also meant for the same purpose this is what I chose. Also data here is best classified using a non-linear separator as we can see from the test scores.</p>
+I prefer to use randomForests given the predictibility guarantee it gives us over the other types of models also on performance basis we find the training time is at par with the three and the prediction time is the fastest.It beats gradient boosting in terms of training time which was trying to compete it in accuracy.</p>
+<p>We find the data showing less noise -slightly unbalanced (There are more passing students than on passing students) and its size is small therefore we can have ensemble of more decision trees and pick up nuances of data better if data was large we had to think of computation becoming an issue if our was to capture all the nuances of data because then we had to scale up the number of decision trees to do so.</p>
 
 </div>
 </div>
@@ -12587,10 +12588,11 @@ I prefer to use SVM model for classification because it performs best on the tes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong>
-The SVM takes data about previous students (age, gender, family, etc), and uses them to create a function that draws a boundary between the students who passed and those who didn't. The boundary should be drawn so as to maximize the margin between the points that represent student who passed and students who didn't.</p>
-<p>Often, though, it's not easy to draw a decision boundary in low dimensions, so the SVM separates the passing and failing students by using a function that transform our 2-d data into higher dimensions in-order to make a decision boundary between them .</p>
-<p>Using this function created with students we already know passed or not, the SVM can look at new students' data and predict whether the student passes or fails.</p>
+<p><strong>Answer: </strong></p>
+<p>RandomForest is an algorithm which is just like the algorithm followed by your students to improve their performance.</p>
+<p>What do your students do when exams come?</p>
+<p>They sit together and try to study. Each may be an average learner i.e he captures atleast half of what he studies and thats why you pass him. They do group study to help each other out.</p>
+<p>Each take some chapters randomly from (say about 66% of total content of) the book and reads and tries to find the best meaning from it and explains it to other kids.On an average each learner gets benifited from each other in turn on an average the overall perfomance of each student increases.The same is true for this algorithm replace your students with decision trees and the answers that they write in exam will be the average of whatever knowledge each derived after reading and listening to each other or the ensemble will result in the best overall performance.</p>
 
 </div>
 </div>
@@ -12621,30 +12623,23 @@ The SVM takes data about previous students (age, gender, family, etc), and uses 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span><span class="n">f1_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span><span class="p">,</span><span class="n">scale</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span>  <span class="p">[{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span><span class="mf">1e-2</span><span class="p">,</span><span class="mf">1e-1</span><span class="p">],</span>
-                     <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">200</span><span class="p">]},{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">],</span>
-                     <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">200</span><span class="p">]}]</span>
-                    
-
+<span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;max_features&#39;</span><span class="p">:[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="s1">&#39;auto&#39;</span><span class="p">],</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">150</span><span class="p">],</span><span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:[</span><span class="mi">50</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">100</span><span class="p">]}</span>
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
-
+<span class="n">clf</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span><span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Perform grid search on the classifier using the f1_scorer as the scoring method</span>
-<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span><span class="n">parameters</span><span class="p">,</span><span class="n">scoring</span><span class="o">=</span><span class="n">f1_scorer</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                        <span class="n">n_jobs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pre_dispatch</span><span class="o">=</span><span class="s1">&#39;2*n_jobs&#39;</span><span class="p">)</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span><span class="n">parameters</span><span class="p">,</span><span class="n">scoring</span><span class="o">=</span><span class="n">f1_scorer</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pre_dispatch</span><span class="o">=</span><span class="s1">&#39;2*n_jobs&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Fit the grid search object to the training data and find the optimal parameters</span>
 <span class="n">grid_obj</span> <span class="o">=</span> <span class="n">grid_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
@@ -12667,32 +12662,11 @@ The SVM takes data about previous students (age, gender, family, etc), and uses 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting 6 folds for each of 25 candidates, totalling 150 fits
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=8)]: Done  34 tasks      | elapsed:    4.4s
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;kernel&#39;: &#39;rbf&#39;, &#39;C&#39;: 200, &#39;gamma&#39;: 0.001}
-Made predictions in 0.0000 seconds.
-Tuned model has a training F1 score of 0.8076.
-Made predictions in 0.0000 seconds.
-Tuned model has a testing F1 score of 0.8662.
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=8)]: Done 150 out of 150 | elapsed:    5.5s finished
+<pre>{&#39;max_features&#39;: 0.1, &#39;n_estimators&#39;: 100, &#39;min_samples_leaf&#39;: 50}
+Made predictions in 0.0080 seconds.
+Tuned model has a training F1 score of 0.8024.
+Made predictions in 0.0060 seconds.
+Tuned model has a testing F1 score of 0.8050.
 </pre>
 </div>
 </div>
@@ -12716,10 +12690,10 @@ Tuned model has a testing F1 score of 0.8662.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong>
-F1 score training: 0.8076
-F1 score testing: 0.8662
-Score of untuned model was less than tuned model.</p>
+<p><strong>Answer: </strong></p>
+<p>F1 score training: 0.8024</p>
+<p>F1 score testing: 0.8050</p>
+<p>Score of tuned model was greater than untuned model if we consider the average of some of the random states values we could jack in because the untuned model was not cross validated and the accuracy could change if we again change the random state by around 10 percent on the downside so on an average the score of tuned model is better.</p>
 
 </div>
 </div>
