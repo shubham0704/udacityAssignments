@@ -90,14 +90,23 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Calculate the maximum Q-value of all actions for a given state
-        best_action = None
+        # best_action = None
+        # best_reward = 0.0
+        # for action in self.valid_actions:
+        #     if self.Q[state][action] >= best_reward:
+        #         best_action = action
+        #         best_reward = self.Q[state][action]
         best_reward = 0.0
+        candidates = []
         for action in self.valid_actions:
-            if self.Q[state][action] >= best_reward:
-                best_action = action
+            if self.Q[state][action] > best_reward:
+                candidates[:] = []
                 best_reward = self.Q[state][action]
+                candidates.append(action)
+            elif  self.Q[state][action] == best_reward:
+                candidates.append(action)
 
-        return best_action, best_reward 
+        return random.sample(candidates, 1)[0]
 
 
     def createQ(self, state):
@@ -134,7 +143,7 @@ class LearningAgent(Agent):
         elif p <= self.epsilon:
             action =  self.valid_actions[index]
         else:
-            action, _ = self.get_maxQ(self.state)
+            action = self.get_maxQ(self.state)
         ########### 
         ## TO DO ##
         ###########
@@ -156,7 +165,7 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         self.Q[state][action] += (1 - self.alpha)*self.Q[state][action]\
-                                  + self.alpha*(reward + self.get_maxQ(state)[1])
+                                  + self.alpha*(reward)
         return
 
 
