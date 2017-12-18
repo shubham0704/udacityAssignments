@@ -223,6 +223,8 @@ class Simulator(object):
             # Increment
             total_trials = total_trials + 1
             trial = trial + 1
+            tsc = a.total_states_covered
+            print "\n Percentage of total states covered: ", (tsc/384.0)*100, "\n"
 
         # Clean up
         if self.log_metrics:

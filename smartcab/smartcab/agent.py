@@ -35,8 +35,9 @@ class LearningAgent(Agent):
         # Set any additional class parameters as needed
         self.t = 0
         #self.a = 0.98   
-        self.a = 0.0005
-        #self.b = 0.99
+        self.a = 0.00009
+        #self.a = 0.0005
+        self.total_states_covered = 0
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -59,7 +60,7 @@ class LearningAgent(Agent):
             #self.epsilon = self.epsilon*(self.a**self.t)
             #self.epsilon = self.epsilon*np.exp(-1*self.a*self.t)
             self.epsilon = self.epsilon*np.cos(self.a*self.t)
-            self.alpha = self.alpha*np.cos(self.a*self.t)
+            #self.alpha = self.alpha*np.cos(self.a*self.t)
             #self.alpha = self.alpha*(self.b**self.t)
             self.t += 1
         return None
@@ -119,6 +120,7 @@ class LearningAgent(Agent):
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
         if state not in self.Q:
+            self.total_states_covered +=1
             actions = {}
             for action in self.valid_actions:
                  actions[action] = 0.0
