@@ -34,9 +34,7 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.t = 0
-        #self.a = 0.98   
-        self.a = 0.00009
-        #self.a = 0.0005
+        self.a = 0.0005
         self.total_states_covered = 0
 
     def reset(self, destination=None, testing=False):
@@ -91,23 +89,9 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Calculate the maximum Q-value of all actions for a given state
-        # best_action = None
-        # best_reward = 0.0
-        # for action in self.valid_actions:
-        #     if self.Q[state][action] >= best_reward:
-        #         best_action = action
-        #         best_reward = self.Q[state][action]
-        best_reward = 0.0
-        candidates = []
-        for action in self.valid_actions:
-            if self.Q[state][action] > best_reward:
-                candidates[:] = []
-                best_reward = self.Q[state][action]
-                candidates.append(action)
-            elif  self.Q[state][action] == best_reward:
-                candidates.append(action)
-
-        return random.sample(candidates, 1)[0]
+        best_actions = [action for action in self.valid_actions if self.Q[state][action] == max(self.Q[state].values())]
+        
+        return random.choice(best_actions)
 
 
     def createQ(self, state):
@@ -119,7 +103,7 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if state not in self.Q:
+        if state not in self.Q and self.learning:
             self.total_states_covered +=1
             actions = {}
             for action in self.valid_actions:
@@ -166,7 +150,8 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        self.Q[state][action] += (1 - self.alpha)*self.Q[state][action]\
+        if self.learning:
+            self.Q[state][action] = (1 - self.alpha)*self.Q[state][action]\
                                   + self.alpha*(reward)
         return
 
