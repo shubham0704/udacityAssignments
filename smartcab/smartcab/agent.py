@@ -103,12 +103,13 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if state not in self.Q and self.learning:
-            self.total_states_covered +=1
-            actions = {}
-            for action in self.valid_actions:
-                 actions[action] = 0.0
-            self.Q[state] = actions
+        if self.learning:
+            if state not in self.Q:
+                self.total_states_covered +=1
+                actions = {}
+                for action in self.valid_actions:
+                     actions[action] = 0.0
+                self.Q[state] = actions
             
         return
 

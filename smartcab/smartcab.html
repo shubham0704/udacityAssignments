@@ -16756,6 +16756,15 @@ Optimal policies (example):</p>
 <p>So in an ideal environment according to US traffic laws
 <img src="driving_latest.png" alt=""></p>
 <p>There are multiple other agents which act and there are laws such as pedestrians have the right to move and cars must come at a complete hault. These factors are not part of this environment. But other factors, ones which deal with cars are present. i.e the states that are mentioned above.</p>
+<p>Suboptimal Policies(example):</p>
+
+<pre><code>('forward', 'green', 'right', 'left', 'forward')
+ -- forward : 0.00
+ -- right : 0.16
+ -- None : -2.10
+ -- left : 0.00</code></pre>
+<p>Waypoint points in forward direction and there is green light. The traffic on the intersection is moving towards right. 
+Instead of driving forward its moving right. This is not the optimal action, because it is not efficient.</p>
 
 </div>
 </div>
