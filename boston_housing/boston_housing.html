@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Import libraries necessary for this project</span>
@@ -11828,6 +11828,18 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -13763,16 +13775,16 @@ RK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>Introduction - 
-Decision Trees are non-parametric. Also, they segregate data based on current set of train data points. It means it does not have any presumptions about the target value. Therefore they in general have low bias.</p>
 <ol>
-<li>At depth=1 the model suffers from high variance.</li>
-<li>At depth=10 model suffers from high bias</li>
+<li>At depth=1 the model suffers from high bias.</li>
+<li>At depth=10 model suffers from high variance.</li>
 </ol>
 <p>Intuition for conclusion 1. -
 The model doesn't learn much at depth 1. i.e this model has only used 1 feature to perform the split on the dataset. It is unable to address the complexity of the data. A more complex rule set is necessary. Let us look at the graph with max_depth=1 above, The models performance on the data is invariable as more number of training data points are added. It means it learns simple rules and doesn't learn much. If it would learn then we would not see the constant slope.</p>
+<p>In the <strong>model complexity curve</strong> we see that there is not much difference between scores obtained on train and validation. Indicating that there is a low variance. But, it is also obtaining a low score on training indicating it is unable to learn more from training data indicating high bias.</p>
 <p>Intuition for conclusion 2. -
-The model suffers from high variance. This is because when we increase the depth the variability decreases after depth 4 in the graph above. The prediction becomes smoother, the score is almost invariant. There is a lot of confidence. This also means there is a lot of bias.</p>
+The model suffers from high variance. This is because when we increase the depth the variability decreases after depth 4 in the graph above. The prediction becomes smoother, the score is almost invariant. There is a lot of confidence.</p>
+<p>As you can see in the <strong>model complexity curve</strong> above there is a lot of difference in the scores obtained on  train and validation. Though the model gets a very high score on training but it performs very poor on validation. This is because the model starts to learn the noise in the data. It doesn't generalise well to unseen data.</p>
 
 </div>
 </div>
@@ -14201,6 +14213,7 @@ Range in prices: $69,044.61
 <li><p>No it would certainly not be the applicable. That is because the price of houses in rural areas is relatively less.</p>
 </li>
 </ul>
+<p>The constructed model should not be used with the real world data.</p>
 
 </div>
 </div>
