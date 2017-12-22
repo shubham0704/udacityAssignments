@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Import libraries necessary for this project</span>
@@ -11828,18 +11828,6 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
@@ -12009,7 +11997,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># TODO: Import &#39;r2_score&#39;</span>
@@ -12171,13 +12159,13 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="c1"># TODO: Shuffle and split the data into training and testing subsets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Success</span>
 <span class="k">print</span> <span class="s2">&quot;Training and testing split was successful.&quot;</span>
@@ -13775,14 +13763,16 @@ RK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
+<p>Introduction - 
+Decision Trees are non-parametric. Also, they segregate data based on current set of train data points. It means it does not have any presumptions about the target value. Therefore they in general have low bias.</p>
 <ol>
-<li>One thing to note is Decision Trees are non-parametric. Also, they segregate data based on current set of train data points. It means it does not have any presumptions about the target value. Therefore it has low bias.</li>
-<li><p>For proof purpose for all 4 graphs shown above, The models performance on the data is invariable as more number of training data points are added. It means it learns simple rules and doesn't learn much. If it would learn then we would not see the constant slope.</p>
-</li>
-<li><p>The model suffers from high variance. This is because when we increase the depth the variability decreases after depth 4. The prediction becomes smoother, the score is almost invariant. There is a lot of confidence. This also means there is a lot of bias.</p>
-</li>
+<li>At depth=1 the model suffers from high variance.</li>
+<li>At depth=10 model suffers from high bias</li>
 </ol>
-<p>At depth=10 model start suffering from high bias. (3) Justifies my intuition</p>
+<p>Intuition for conclusion 1. -
+The model doesn't learn much at depth 1. i.e this model has only used 1 feature to perform the split on the dataset. It is unable to address the complexity of the data. A more complex rule set is necessary. Let us look at the graph with max_depth=1 above, The models performance on the data is invariable as more number of training data points are added. It means it learns simple rules and doesn't learn much. If it would learn then we would not see the constant slope.</p>
+<p>Intuition for conclusion 2. -
+The model suffers from high variance. This is because when we increase the depth the variability decreases after depth 4 in the graph above. The prediction becomes smoother, the score is almost invariant. There is a lot of confidence. This also means there is a lot of bias.</p>
 
 </div>
 </div>
@@ -13902,7 +13892,7 @@ The benifits of k-fold cross validation is that -</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -13927,7 +13917,7 @@ The benifits of k-fold cross validation is that -</p>
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create the grid search object</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring_fnc</span><span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
 
     <span class="c1"># Fit the grid search object to the data to compute the optimal model</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -13937,6 +13927,25 @@ The benifits of k-fold cross validation is that -</p>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python2.7/dist-packages/sklearn/grid_search.py:43: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
+  DeprecationWarning)
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13962,7 +13971,7 @@ The benifits of k-fold cross validation is that -</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Fit the training data to the model using grid search</span>
@@ -14048,7 +14057,7 @@ The maximum depth output for given data is 4. It confirms my above reading. Ther
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Produce a matrix for client data</span>
@@ -14075,9 +14084,9 @@ The maximum depth output for given data is 4. It confirms my above reading. Ther
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Predicted selling price for Client 1&#39;s home: $412,094.12
-Predicted selling price for Client 2&#39;s home: $231,228.26
-Predicted selling price for Client 3&#39;s home: $936,027.27
+<pre>Predicted selling price for Client 1&#39;s home: $391,183.33
+Predicted selling price for Client 2&#39;s home: $189,123.53
+Predicted selling price for Client 3&#39;s home: $942,666.67
 </pre>
 </div>
 </div>
@@ -14091,12 +14100,11 @@ Predicted selling price for Client 3&#39;s home: $936,027.27
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-The predicted value for the clients is given
-Client 1's home: 412,094.12
-Client 2's home: 231,228.26
-Client 3's home: 936,027.27</p>
-<p>Now the minimum pric
-es for the house would be 105,000.00 in any area in Boston.
+The predicted value for the clients is given as - <br>
+Client 1's home: 391,183.33<br>
+Client 2's home: 189,123.53<br>
+Client 3's home: 942,666.67<br></p>
+<p>Now the minimum prices for the house would be 105,000.00 in any area in Boston.
 With an average house costing 454,342.94 (+ or -) 165,171.13</p>
 <p>Now going by each features of the client's  homes features -</p>
 <ul>
@@ -14120,7 +14128,7 @@ With an average house costing 454,342.94 (+ or -) 165,171.13</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">vs</span><span class="o">.</span><span class="n">PredictTrials</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">fit_model</span><span class="p">,</span> <span class="n">client_data</span><span class="p">)</span>
@@ -14141,17 +14149,17 @@ With an average house costing 454,342.94 (+ or -) 165,171.13</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Trial 1: $391,183.33
-Trial 2: $411,417.39
+Trial 2: $419,700.00
 Trial 3: $415,800.00
-Trial 4: $428,316.00
+Trial 4: $420,622.22
 Trial 5: $413,334.78
 Trial 6: $411,931.58
 Trial 7: $399,663.16
 Trial 8: $407,232.00
-Trial 9: $402,531.82
+Trial 9: $351,577.61
 Trial 10: $413,700.00
 
-Range in prices: $37,132.67
+Range in prices: $69,044.61
 </pre>
 </div>
 </div>
